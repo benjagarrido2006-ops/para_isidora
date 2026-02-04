@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Isidora 💓</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://iiischools.com/wp-content/uploads/2022/01/portada-valentin.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.8s ease-in-out;
+        }
+
+        .contenedor-inicio {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .boton-corazon {
+            width: 120px; height: 110px;
+            background: none; border: none; cursor: pointer;
+            position: relative; display: flex;
+            justify-content: center; align-items: center;
+            animation: latido 1.2s infinite;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .boton-corazon::before, .boton-corazon::after {
+            content: ""; position: absolute; top: 0;
+            width: 60px; height: 100px; background: #ff4d4d;
+            border-radius: 50px 50px 0 0; z-index: 1;
+        }
+        .boton-corazon::before { left: 60px; transform: rotate(-45deg); transform-origin: 0 100%; }
+        .boton-corazon::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+
+        .texto-boton {
+            position: relative; z-index: 10; color: white;
+            font-weight: bold; font-size: 1rem; margin-bottom: 15px;
+        }
+
+        .contenedor-principal {
+            position: absolute;
+            width: 100%; height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://saludconlupa.com/media/images/SanValentin.width-1920.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex; justify-content: center; align-items: center;
+            transition: background 1.2s ease;
+        }
+
+        .san-valentin { 
+            text-align: center; 
+            padding: 20px; 
+            z-index: 5; 
+            width: 100%; 
+            max-height: 100vh;
+            overflow-y: auto; 
+        }
+
+        .pregunta {
+            color: white; font-size: 1.8rem; margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .btn { padding: 15px 40px; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        .btn-si { background-color: #4cd137; color: white; }
+        .btn-no { background-color: #e84118; color: white; position: relative; }
+
+        .galeria-final {
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 15px;
+            max-width: 500px;
+            margin: 20px auto;
+            animation: aparecer 1.5s ease forwards;
+        }
+
+        .foto-isidora {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border: 4px solid white;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+        }
+
+        .foto-isidora:nth-child(odd) { transform: rotate(-3deg); }
+        .foto-isidora:nth-child(even) { transform: rotate(3deg); }
+        .foto-isidora:last-child { 
+            grid-column: span 2; 
+            width: 60%; 
+            margin: 0 auto; 
+            transform: rotate(0deg); 
+        }
+
+        @keyframes latido { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes aparecer { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+        .corazon-lluvia { position: absolute; top: -50px; font-size: 2rem; animation: caer linear forwards; z-index: 20; }
+        @keyframes caer { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .ocultar { opacity: 0; visibility: hidden; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" class="overlay">
+        <div class="contenedor-inicio">
+            <h2 style="color:white; margin-bottom:50px; text-shadow:2px 2px 10px #000;">Gire la pantalla para continuar</h2>
+            <button class="boton-corazon" onclick="empezar()">
+                <span class="texto-boton">LISTO</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="contenedor-principal" id="escena2">
+        <div id="sanValentin" class="san-valentin">
+            <h1 class="pregunta" id="textoPrincipal">¿ 💓 Quieres ser mi San Valentín Isidora 💓 ?</h1>
+            
+            <div class="opciones" id="botonesContenedor">
+                <button class="btn btn-si" onclick="aceptar()">SÍ</button>
+                <button id="btnNo" class="btn btn-no" onmouseover="moverBoton(this)" onclick="moverBoton(this)">NO</button>
+            </div>
+
+            <div class="galeria-final" id="galeria">
+                <img src="https://i.pinimg.com/originals/2a/71/3f/2a713fcef92437205d07b2358bea03d9.jpg" class="foto-isidora">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpIdoG1zjV46G634tE6CRqpBS5LMhhsFpWKBT4iwhVXoGHUpdySnuKjXRfHLnsdVOK7A0&usqp=CAU" class="foto-isidora">
+                <img src="https://media.silhouettedesignstore.com/media/catalog/product/k/a/kawaii_stick_man_with_present.png" class="foto-isidora">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYdIrIV4zQe0a4tu5_lBmiA29wnJtryDQqhhXcibxqCUFGUkybvuAdFt6RXi9orLub4xo&usqp=CAU" class="foto-isidora">
+                <img src="https://i.pinimg.com/564x/09/82/6e/09826e5b92db50eb0d4c9f2b241cd426.jpg" class="foto-isidora">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function empezar() { document.getElementById('overlay').classList.add('ocultar'); }
+
+        function moverBoton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function aceptar() {
+            document.getElementById('escena2').style.backgroundImage = "url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920')";
+            document.getElementById('textoPrincipal').innerHTML = "❤️ ¡SABÍA QUE DIRÍAS QUE SÍ! ❤️<br><small style='font-size:1.2rem'>Te quiero mucho Isidora</small>";
+            document.getElementById('botonesContenedor').style.display = "none";
+            document.getElementById('galeria').style.display = "grid";
+            setInterval(crearCorazon, 200);
+        }
+
+        function crearCorazon() {
+            const corazon = document.createElement('div');
+            corazon.classList.add('corazon-lluvia');
+            const tipos = ["❤️", "💖", "💓", "💘"];
+            corazon.innerHTML = tipos[Math.floor(Math.random() * tipos.length)];
+            corazon.style.left = Math.random() * 100 + "vw";
+            corazon.style.animationDuration = Math.random() * 2 + 2 + "s";
+            document.body.appendChild(corazon);
+            setTimeout(() => { corazon.remove(); }, 4000);
+        }
+    </script>
+</body>
+</html>
